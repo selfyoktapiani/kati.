@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kategori Tanaman Hias</title>
+    <link rel="stylesheet" href="produk.css" />
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar">
+      <div class="navbar-title">
+        <h1>Tanaman Hias</h1>
+      </div>
+      <div class="search-container">
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Cari tanaman..."
+          onkeyup="cariProduk()"
+        />
+        <span class="search-icon">🔍</span>
+      </div>
+    </nav>
+
+    <!-- Deskripsi -->
+    <header class="page-description">
+      <p>
+        Pilihan tanaman hias segar dan berkualitas tinggi untuk mempercantik
+        rumah Anda.
+      </p>
+    </header>
+
+    <!-- Daftar Produk -->
+    <section class="product-list" id="productList">
+      <div class="product-card">
+        <img src="Monstera-Siltepecana-El-Salvador.jpg" alt="monstera" />
+        <h3>Monstera Siltepecana</h3>
+        <p class="price">Rp 159.000</p>
+        <a
+          href="transaksi.html?produk=Monstera%20Siltepecana&harga=159000&gambar=img/Monstera-Siltepecana-El-Salvador.jpg"
+          class="btn-beli"
+        >
+          Beli / Pesan
+        </a>
+      </div>
+
+      <div class="product-card">
+        <img src="lm.jpg" alt="Sanseviera " />
+        <h3>Sanseviera</h3>
+        <p class="price">Rp 83.000</p>
+        <a
+          href="transaksi.html?produk=Sanseviera&harga=83000&gambar=lm.jpg"
+          class="btn-beli"
+        >
+          Beli / Pesan
+        </a>
+      </div>
+
+      <div class="product-card">
+        <img src="ct.jpg" alt="kaktus-mini" />
+        <h3>Kaktus Mini</h3>
+        <p class="price">Rp 24.790</p>
+
+        <a
+          href="transaksi.html?produk=Kaktus%20Mini&harga=24790&gambar=ct.jpg"
+          class="btn-beli"
+        >
+          Beli / Pesan
+        </a>
+      </div>
+
+      <div class="product-card">
+        <img src="OIP1.jpeg" alt="azalea" />
+        <h3>Bonsai Azalea</h3>
+        <p class="price">Rp 171.000</p>
+        <a
+          href="transaksi.html?produk=Bonsai%20Azalea&harga=171000&gambar=OIP1.jpeg"
+          class="btn-beli"
+          >Beli / Pesan</a
+        >
+      </div>
+
+      <div class="product-card">
+        <img src="Monstera-in-Sawyer-Pot-Large.jpg" alt="deliciosa" />
+        <h3>Monstera Deliciosa</h3>
+        <p class="price">Rp 72.000</p>
+        <a
+          href="transaksi.html?produk=Monstera%20Deliciosa&harga=72000&gambar=Monstera-in-Sawyer-Pot-Large.jpg"
+          class="btn-beli"
+          >Beli / Pesan</a
+        >
+      </div>
+
+      <div class="product-card">
+        <img src="PHG0718Bonsaitree08.jpg" alt="bougenville" />
+        <h3>Bonsai Bougenville</h3>
+        <p class="price">Rp 99.000</p>
+        <a
+          href="transaksi.html?produk=Bonsai%20Bougenville&harga=99000&gambar=PHG0718Bonsaitree08.jpg"
+          class="btn-beli"
+          >Beli / Pesan</a
+        >
+      </div>
+    </section>
+
+    <script>
+      function cariProduk() {
+        let input = document.getElementById("searchInput").value.toLowerCase();
+        let cards = document.getElementsByClassName("product-card");
+        for (let i = 0; i < cards.length; i++) {
+          let title = cards[i]
+            .getElementsByTagName("h3")[0]
+            .innerText.toLowerCase();
+          cards[i].style.display = title.includes(input) ? "" : "none";
+        }
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bibit, Benih & Perlengkapan</title>
+    <link rel="stylesheet" href="produk.css" />
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar">
+      <div class="navbar-title">
+        <h1>Bibit, Benih & Perlengkapan</h1>
+      </div>
+      <div class="search-container">
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Cari tanaman..."
+          onkeyup="cariProduk()"
+        />
+        <span class="search-icon">🔍</span>
+      </div>
+    </nav>
+
+    <!-- Deskripsi -->
+    <header class="page-description">
+      <p>
+        Mulai perjalanan berkebun Anda dengan bibit unggulan, benih pilihan, dan
+        perlengkapan berkualitas...karena taman indah berawal dari fondasi yang
+        tepat.
+      </p>
+    </header>
+
+    <!-- Daftar Produk -->
+    <section class="product-list" id="productList">
+      <div class="product-card">
+        <img src="pandan.jpeg" alt="pandan" />
+        <h3>Bibit Daun Pandan</h3>
+        <p class="price">Rp 10.000</p>
+        <a
+          href="transaksi.html?produk=Bibit%20Daun%20Pandan&harga=10000&gambar=pandan.jpeg"
+          class="btn-beli"
+        >
+          Beli / Pesan
+        </a>
+      </div>
+
+      <div class="product-card">
+        <img src="bayam.jpeg" alt="bayam" />
+        <h3>Benih Bayam</h3>
+        <p class="price">Rp 31.000</p>
+        <a
+          href="transaksi.html?produk=Benih%20Bayam&harga=31000&gambar=bayam.jpeg"
+          class="btn-beli"
+        >
+          Beli / Pesan
+        </a>
+      </div>
+
+      <div class="product-card">
+        <img src="pot.jpeg" alt="pot" />
+        <h3>Pot Tanaman</h3>
+        <p class="price">Rp 6.500</p>
+
+        <a
+          href="transaksi.html?produk=Pot%20Tanaman&harga=6500&gambar=pot.jpeg"
+          class="btn-beli"
+        >
+          Beli / Pesan
+        </a>
+      </div>
+    </section>
+
+    <script>
+      function cariProduk() {
+        let input = document.getElementById("searchInput").value.toLowerCase();
+        let cards = document.getElementsByClassName("product-card");
+        for (let i = 0; i < cards.length; i++) {
+          let title = cards[i]
+            .getElementsByTagName("h3")[0]
+            .innerText.toLowerCase();
+          cards[i].style.display = title.includes(input) ? "" : "none";
+        }
+      }
+    </script>
+  </body>
+</html>

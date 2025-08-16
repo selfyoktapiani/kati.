@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Belanja Sekarang</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background: #fdfdfd;
+      }
+
+      nav.navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 20px;
+        background: #afe1af;
+        color: #063b2d;
+      }
+      nav h1 {
+        margin: 0;
+      }
+
+      .search-container {
+        display: flex;
+        align-items: center;
+        background: white;
+        border-radius: 20px;
+        padding: 5px 10px;
+        width: 350px;
+      }
+      .search-container input {
+        padding: 8px 12px;
+        border-radius: 20px;
+        border: none;
+        outline: none;
+        width: 100%;
+      }
+      .hamburger-menu {
+        font-size: 22px;
+        cursor: pointer;
+        background: #333;
+        color: white;
+        padding: 8px 12px;
+        border-radius: 5px;
+        margin-left: 10px;
+      }
+      .hamburger-menu:hover {
+        background: #555;
+      }
+
+      .sidebar {
+        position: fixed;
+        top: 0;
+        left: -250px;
+        width: 250px;
+        height: 100%;
+        background: #333;
+        color: white;
+        padding-top: 60px;
+        transition: left 0.3s ease;
+        z-index: 1000;
+      }
+      .sidebar a {
+        display: block;
+        padding: 12px 20px;
+        color: white;
+        text-decoration: none;
+      }
+      .sidebar a:hover {
+        background: #444;
+      }
+      .sidebar.active {
+        left: 0;
+      }
+
+      .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.4);
+        display: none;
+        z-index: 500;
+      }
+      .overlay.active {
+        display: block;
+      }
+
+      .carousel-container {
+        position: relative;
+        padding: 30px 60px;
+      }
+      .product-list {
+        display: flex;
+        gap: 20px;
+        overflow-x: auto;
+        scroll-behavior: smooth;
+        scroll-snap-type: x mandatory;
+      }
+      .product-list::-webkit-scrollbar {
+        display: none;
+      }
+
+      .product-card {
+        flex: 0 0 auto;
+        width: 220px;
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        padding: 15px;
+        scroll-snap-align: start;
+        transition: transform 0.3s, box-shadow 0.3s;
+        cursor: pointer;
+      }
+      .product-card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+      }
+      .product-card img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 10px;
+        margin-bottom: 10px;
+        transition: transform 0.3s;
+      }
+      .product-card:hover img {
+        transform: scale(1.1);
+      }
+
+      .btn-beli {
+        display: inline-block;
+        background: #27ae60;
+        color: white;
+        padding: 8px 12px;
+        border-radius: 6px;
+        text-decoration: none;
+        transition: 0.3s;
+      }
+      .btn-beli:hover {
+        background: #2ecc71;
+        transform: scale(1.05);
+      }
+
+      .arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: #fff;
+        border: none;
+        font-size: 28px;
+        cursor: pointer;
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .arrow.left {
+        left: 15px;
+      }
+      .arrow.right {
+        right: 15px;
+      }
+      .arrow:hover {
+        background: #27ae60;
+        color: #fff;
+        transform: translateY(-50%) scale(1.1);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar">
+      <h1>bloomsyde</h1>
+      <div class="search-container">
+        <input type="text" placeholder="Cari tanaman..." />
+        <span class="hamburger-menu" onclick="toggleMenu()">☰</span>
+      </div>
+    </nav>
+
+    <!-- Sidebar -->
+    <div id="sidebar" class="sidebar">
+      <a href="index.html">🏠 Home</a>
+      <a href="k.html">🛒 Keranjang</a>
+      <a href="index.html#about">📑 Tentang Kami</a>
+      <a href="index.html#contact">📞 Kontak</a>
+    </div>
+    <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+
+    <!-- Tanaman Hias -->
+    <h2 style="text-align: center">Tanaman Hias</h2>
+    <section class="carousel-container">
+      <button class="arrow left" onclick="scrollLeft('productList1')">
+        &#10094;
+      </button>
+      <div class="product-list" id="productList1">
+        <div class="product-card">
+          <img src="OIP1.jpeg" alt="azalea" />
+          <h3>Bonsai Azalea</h3>
+          <p class="price">Rp 171.000</p>
+          <a
+            href="transaksi.html?produk=Bonsai%20Azalea&harga=171000&gambar=OIP1.jpeg"
+            class="btn-beli"
+            >Beli / Pesan</a
+          >
+        </div>
+        <div class="product-card">
+          <img src="Monstera-in-Sawyer-Pot-Large.jpg" alt="deliciosa" />
+          <h3>Monstera Deliciosa</h3>
+          <p class="price">Rp 72.000</p>
+          <a
+            href="transaksi.html?produk=Monstera%20Deliciosa&harga=72000&gambar=Monstera-in-Sawyer-Pot-Large.jpg"
+            class="btn-beli"
+            >Beli / Pesan</a
+          >
+        </div>
+
+        <div class="product-card">
+          <img src="lm.jpg" alt="Sanseviera " />
+          <h3>Sanseviera</h3>
+          <p class="price">Rp 83.000</p>
+          <a
+            href="transaksi.html?produk=Sanseviera&harga=83000&gambar=lm.jpg"
+            class="btn-beli"
+            >Beli / Pesan</a
+          >
+        </div>
+
+        <div class="product-card">
+          <img src="PHG0718Bonsaitree08.jpg" alt="bougenville" />
+          <h3>Bonsai Bougenville</h3>
+          <p class="price">Rp 99.000</p>
+          <a
+            href="transaksi.html?produk=Bonsai%20Bougenville&harga=99000&gambar=PHG0718Bonsaitree08.jpg"
+            class="btn-beli"
+            >Beli / Pesan</a
+          >
+        </div>
+
+        <div class="product-card">
+          <img src="spathiphyllum-peace-lily.jpg" alt="lily" />
+          <h3>Peace Lily</h3>
+          <p class="price">Rp 58.000</p>
+          <a
+            href="transaksi.html?produk=Peace%20Lily&harga=58000&gambar=spathiphyllum-peace-lily.jpg"
+            class="btn-beli"
+            >Beli / Pesan</a
+          >
+        </div>
+
+        <div class="product-card">
+          <img src="Monstera-Siltepecana-El-Salvador.jpg" alt="monstera" />
+          <h3>Monstera Siltepecana</h3>
+          <p class="price">Rp 159.000</p>
+          <a
+            href="transaksi.html?produk=Monstera%20Siltepecana&harga=159000&gambar=Monstera-Siltepecana-El-Salvador.jpg"
+            class="btn-beli"
+            >Beli / Pesan</a
+          >
+        </div>
+
+        <div class="product-card">
+          <img src="ct.jpg" alt="kaktus-mini" />
+          <h3>Kaktus Mini</h3>
+          <p class="price">Rp 24.790</p>
+          <a
+            href="transaksi.html?produk=Kaktus%20Mini&harga=24790&gambar=ct.jpg"
+            class="btn-beli"
+            >Beli / Pesan</a
+          >
+        </div>
+      </div>
+      <button class="arrow right" onclick="scrollRight('productList1')">
+        &#10095;
+      </button>
+    </section>
+
+    <!-- Tanaman Produktif -->
+    <h2 style="text-align: center">Tanaman Produktif</h2>
+    <section class="carousel-container">
+      <button class="arrow left" onclick="scrollLeft('productList2')">
+        &#10094;
+      </button>
+      <div class="product-list" id="productList2">
+        <div class="product-card">
+          <img src="cara-menanam-daun-bawang-di-pot.jpg" alt="daun" />
+          <h3>Daun Bawang</h3>
+          <p class="price">Rp 12.000</p>
+          <a
+            href="transaksi.html?produk=Daun%20Bawang&harga=12000&gambar=cara-menanam-daun-bawang-di-pot.jpg"
+            class="btn-beli"
+            >Beli / Pesan</a
+          >
+        </div>
+
+        <div class="product-card">
+          <img src="OIP.jpeg" alt="tomat" />
+          <h3>Pohon Tomat</h3>
+          <p class="price">Rp 76.000</p>
+          <a
+            href="transaksi.html?produk=Pohon%20Tomat&harga=76000&gambar=OIP.jpeg"
+            class="btn-beli"
+          >
+            Beli / Pesan
+          </a>
+        </div>
+
+        <div class="product-card">
+          <img src="maxresdefault.jpg" alt="timun " />
+          <h3>Mentimun</h3>
+          <p class="price">Rp 47.500</p>
+          <a
+            href="transaksi.html?produk=Mentimun&harga=47500&gambar=maxresdefault.jpg"
+            class="btn-beli"
+            >Beli / Pesan</a
+          >
+        </div>
+
+        <div class="product-card">
+          <img src="026441f17b346a14604582d76f8dc821.jpg" alt="strawberi" />
+          <h3>Strawberi</h3>
+          <p class="price">Rp 35.000</p>
+          <a
+            href="transaksi.html?produk=Strawberi&harga=35000&gambar=026441f17b346a14604582d76f8dc821.jpg"
+            class="btn-beli"
+            >Beli / Pesan</a
+          >
+        </div>
+
+        <div class="product-card">
+          <img src="pohon-jeruk.jpg" alt="jeruk" />
+          <h3>Pohon Jeruk</h3>
+          <p class="price">Rp 169.000</p>
+          <a
+            href="transaksi.html?produk=Pohon%20Jeruk&harga=169000&gambar=pohon-jeruk.jpg"
+            class="btn-beli"
+          >
+            Beli / Pesan
+          </a>
+        </div>
+
+        <div class="product-card">
+          <img src="cabe.jpg" alt="cabe" />
+          <h3>Pohon Cabai</h3>
+          <p class="price">Rp 57.000</p>
+          <a
+            href="transaksi.html?produk=Pohon%20Cabai&harga=57000&gambar=cabe.jpg"
+            class="btn-beli"
+          >
+            Beli / Pesan
+          </a>
+        </div>
+      </div>
+      <button class="arrow right" onclick="scrollRight('productList2')">
+        &#10095;
+      </button>
+    </section>
+
+    <!-- Pohon & Tanaman Besar -->
+    <h2 style="text-align: center">Pohon & Tanaman Besar</h2>
+    <section class="carousel-container">
+      <button class="arrow left" onclick="scrollLeft('productList3')">
+        &#10094;
+      </button>
+      <div class="product-list" id="productList3">
+        <div class="product-card">
+          <img src="1614309913.png" alt="palem" />
+          <h3>Pohon Palem Bismarck</h3>
+          <p class="price">Rp 497.000</p>
+          <a
+            href="transaksi.html?produk=Pohon%20Palem%20Bismarck&harga=497000&gambar=1614309913.png"
+            class="btn-beli"
+            >Beli / Pesan</a
+          >
+        </div>
+
+        <div class="product-card">
+          <img src="pk.jpg" alt="kamboja" />
+          <h3>Pohon Kamboja</h3>
+          <p class="price">Rp 762.000</p>
+          <a
+            href="transaksi.html?produk=Pohon%20Kamboja&harga=762000&gambar=pk.jpg"
+            class="btn-beli"
+          >
+            Beli / Pesan
+          </a>
+        </div>
+
+        <div class="product-card">
+          <img
+            src="pohon-ketapang-kencana-naikkan-nilai-properti-688x1024.webp"
+            alt="ketapang"
+          />
+          <h3>Pohon Ketapang Kencana</h3>
+          <p class="price">Rp 680.700</p>
+          <a
+            href="transaksi.html?produk=Pohon%20Ketapang%20Kencana&harga=680700&gambar=pohon-ketapang-kencana-naikkan-nilai-properti-688x1024.webp"
+            class="btn-beli"
+          >
+            Beli / Pesan
+          </a>
+        </div>
+
+        <div class="product-card">
+          <img src="jual-pohon-tabebuya-di-bandung.jpg" alt="tabebuya" />
+          <h3>Pohon Tabebuya</h3>
+          <p class="price">Rp 930.700</p>
+          <a
+            href="transaksi.html?produk=Pohon%20Tabebuya&harga=930700&gambar=jual-pohon-tabebuya-di-bandung.jpg"
+            class="btn-beli"
+          >
+            Beli / Pesan
+          </a>
+        </div>
+      </div>
+      <button class="arrow right" onclick="scrollRight('productList3')">
+        &#10095;
+      </button>
+    </section>
+
+    <script>
+      function toggleMenu() {
+        document.getElementById("sidebar").classList.toggle("active");
+        document.getElementById("overlay").classList.toggle("active");
+      }
+      function scrollLeft(id) {
+        document
+          .getElementById(id)
+          .scrollBy({ left: -250, behavior: "smooth" });
+      }
+      function scrollRight(id) {
+        document.getElementById(id).scrollBy({ left: 250, behavior: "smooth" });
+      }
+    </script>
+  </body>
+</html>

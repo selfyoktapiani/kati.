@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kategori Tanaman Produktif</title>
+    <link rel="stylesheet" href="produk.css" />
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar">
+      <div class="navbar-title">
+        <h1>Tanaman Produktif</h1>
+      </div>
+      <div class="search-container">
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Cari tanaman..."
+          onkeyup="cariProduk()"
+        />
+        <span class="search-icon">🔍</span>
+      </div>
+    </nav>
+
+    <!-- Deskripsi -->
+    <header class="page-description">
+      <p>
+        Tanam, rawat, hinga panen...semua bisa dari halaman rumah. Yuk, mulai
+        berkebun!
+      </p>
+    </header>
+
+    <!-- Daftar Produk -->
+    <section class="product-list" id="productList">
+      <div class="product-card">
+        <img src="cabe.jpg" alt="cabe" />
+        <h3>Pohon Cabai</h3>
+        <p class="price">Rp 57.000</p>
+        <a
+          href="transaksi.html?produk=Pohon%20Cabai&harga=57000&gambar=cabe.jpg"
+          class="btn-beli"
+        >
+          Beli / Pesan
+        </a>
+      </div>
+
+      <div class="product-card">
+        <img src="pohon-jeruk.jpg" alt="jeruk" />
+        <h3>Pohon Jeruk</h3>
+        <p class="price">Rp 169.000</p>
+        <a
+          href="transaksi.html?produk=Pohon%20Jeruk&harga=169000&gambar=pohon-jeruk.jpg"
+          class="btn-beli"
+        >
+          Beli / Pesan
+        </a>
+      </div>
+
+      <div class="product-card">
+        <img src="OIP.jpeg" alt="tomat" />
+        <h3>Pohon Tomat</h3>
+        <p class="price">Rp 76.000</p>
+        <a
+          href="transaksi.html?produk=Pohon%20Tomat&harga=76000&gambar=OIP.jpeg"
+          class="btn-beli"
+        >
+          Beli / Pesan
+        </a>
+      </div>
+
+      <div class="product-card">
+        <img src="cara-menanam-daun-bawang-di-pot.jpg" alt="daun" />
+        <h3>Daun Bawang</h3>
+        <p class="price">Rp 12.000</p>
+        <a
+          href="transaksi.html?produk=Daun%20Bawang&harga=12000&gambar=cara-menanam-daun-bawang-di-pot.jpg"
+          class="btn-beli"
+          >Beli / Pesan</a
+        >
+      </div>
+      <div class="product-card">
+        <img src="maxresdefault.jpg" alt="timun " />
+        <h3>Mentimun</h3>
+        <p class="price">Rp 47.500</p>
+        <a
+          href="transaksi.html?produk=Mentimun&harga=47500&gambar=maxresdefault.jpg"
+          class="btn-beli"
+          >Beli / Pesan</a
+        >
+      </div>
+
+      <div class="product-card">
+        <img src="026441f17b346a14604582d76f8dc821.jpg" alt="strawberi" />
+        <h3>Strawberi</h3>
+        <p class="price">Rp 35.000</p>
+        <a
+          href="transaksi.html?produk=Strawberi&harga=35000&gambar=026441f17b346a14604582d76f8dc821.jpg"
+          class="btn-beli"
+          >Beli / Pesan</a
+        >
+      </div>
+    </section>
+
+    <script>
+      function cariProduk() {
+        let input = document.getElementById("searchInput").value.toLowerCase();
+        let cards = document.getElementsByClassName("product-card");
+        for (let i = 0; i < cards.length; i++) {
+          let title = cards[i]
+            .getElementsByTagName("h3")[0]
+            .innerText.toLowerCase();
+          cards[i].style.display = title.includes(input) ? "" : "none";
+        }
+      }
+    </script>
+  </body>
+</html>

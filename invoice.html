@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Invoice</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+        background-color: #afe1af;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+      }
+      .invoice {
+        width: 90%;
+        max-width: 500px;
+        border: 1px solid #ccc;
+        padding: 20px;
+        border-radius: 8px;
+        background-color: white;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        position: relative;
+        z-index: 10;
+      }
+      .invoice img {
+        width: 150px;
+        border-radius: 5px;
+      }
+      .center {
+        text-align: center;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+      }
+      th,
+      td {
+        padding: 8px;
+        border-bottom: 1px solid #ccc;
+        text-align: center;
+      }
+      .total {
+        font-weight: bold;
+      }
+      button {
+        margin-top: 15px;
+        padding: 10px;
+        background: blue;
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
+
+      /* Hamburger button */
+      .hamburger-menu {
+        font-size: 24px;
+        cursor: pointer;
+        position: fixed;
+        top: 15px;
+        left: 15px;
+        background: #333;
+        color: white;
+        padding: 8px 12px;
+        border-radius: 5px;
+        z-index: 1001;
+      }
+      .hamburger-menu:hover {
+        background: #555;
+      }
+
+      /* Sidebar */
+      .sidebar {
+        position: fixed;
+        top: 0;
+        left: -250px;
+        width: 250px;
+        height: 100%;
+        background: #333;
+        color: white;
+        padding-top: 60px;
+        transition: left 0.3s ease;
+        z-index: 1000;
+      }
+      .sidebar a {
+        display: block;
+        padding: 12px 20px;
+        color: white;
+        text-decoration: none;
+      }
+      .sidebar a:hover {
+        background: #444;
+      }
+      .sidebar.active {
+        left: 0;
+      }
+
+      /* Overlay (biar ada efek gelap saat sidebar muncul) */
+      .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.4);
+        display: none;
+        z-index: 500;
+      }
+      .overlay.active {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Tombol hamburger -->
+    <div class="hamburger-menu" onclick="toggleMenu()">☰</div>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+      <a href="index.html">🏠 Home</a>
+      <a href="bs.html">🛒 Produk</a>
+      <a href="index.html#about">📑 Tentang Kami</a>
+    </div>
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+
+    <!-- Invoice -->
+    <div class="invoice">
+      <h2 class="center">Invoice Pembelian</h2>
+      <p id="tanggalWaktu" class="center"></p>
+
+      <div class="center">
+        <img id="gambarProduk" alt="Produk" />
+      </div>
+
+      <p><strong>Produk:</strong> <span id="namaProduk"></span></p>
+      <p><strong>Harga Satuan:</strong> Rp <span id="hargaProduk"></span></p>
+      <p><strong>Nama Pembeli:</strong> <span id="namaPembeli"></span></p>
+      <p><strong>Alamat:</strong> <span id="alamatPembeli"></span></p>
+      <p><strong>Nomor HP:</strong> <span id="nomorHP"></span></p>
+      <p>
+        <strong>Metode Pembayaran:</strong> <span id="metodePembayaran"></span>
+      </p>
+
+      <table>
+        <tr>
+          <th>Jumlah</th>
+          <th>Total Harga</th>
+        </tr>
+        <tr>
+          <td id="jumlahProduk"></td>
+          <td id="totalHarga"></td>
+        </tr>
+      </table>
+      <div class="center">
+        <button onclick="window.print()">Cetak</button>
+      </div>
+    </div>
+
+    <script>
+      function toggleMenu() {
+        document.getElementById("sidebar").classList.toggle("active");
+        document.getElementById("overlay").classList.toggle("active");
+      }
+
+      const params = new URLSearchParams(window.location.search);
+      const produk = params.get("produk");
+      const harga = parseInt(params.get("harga")) || 0;
+      const gambar = params.get("gambar");
+      const nama = params.get("nama");
+      const alamat = params.get("alamat");
+      const nohp = params.get("nohp");
+      const jumlah = parseInt(params.get("jumlah")) || 1;
+      const metode = params.get("metode");
+
+      document.getElementById("namaProduk").textContent = produk;
+      document.getElementById("hargaProduk").textContent =
+        harga.toLocaleString();
+      document.getElementById("gambarProduk").src = gambar;
+      document.getElementById("namaPembeli").textContent = nama;
+      document.getElementById("alamatPembeli").textContent = alamat;
+      document.getElementById("nomorHP").textContent = nohp;
+      document.getElementById("jumlahProduk").textContent = jumlah;
+      document.getElementById("totalHarga").textContent = (
+        harga * jumlah
+      ).toLocaleString();
+      document.getElementById("metodePembayaran").textContent = metode;
+
+      // Buat tanggal & waktu sekarang
+      const sekarang = new Date();
+      const bulanNama = [
+        "Januari",
+        "Februari",
+        "Maret",
+        "April",
+        "Mei",
+        "Juni",
+        "Juli",
+        "Agustus",
+        "September",
+        "Oktober",
+        "November",
+        "Desember",
+      ];
+      const tanggal = sekarang.getDate();
+      const bulan = bulanNama[sekarang.getMonth()];
+      const tahun = sekarang.getFullYear();
+      const jam = sekarang.getHours().toString().padStart(2, "0");
+      const menit = sekarang.getMinutes().toString().padStart(2, "0");
+      const detik = sekarang.getSeconds().toString().padStart(2, "0");
+
+      document.getElementById(
+        "tanggalWaktu"
+      ).textContent = `${tanggal} ${bulan} ${tahun}, ${jam}:${menit}:${detik} WIB`;
+    </script>
+  </body>
+</html>

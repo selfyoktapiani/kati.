@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Form Transaksi</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+        background-color: #afe1af;
+      }
+
+      h2 {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .transaksi-container {
+        display: flex;
+        gap: 20px;
+        max-width: 800px;
+        margin: auto;
+        border: 1px solid #ccc;
+        padding: 20px;
+        border-radius: 8px;
+        background-color: white;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .produk-gambar img {
+        width: 100%;
+        max-width: 300px;
+        border-radius: 5px;
+        display: block;
+        margin: auto;
+      }
+
+      form {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      input,
+      textarea,
+      select {
+        padding: 10px;
+        font-size: 14px;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+      }
+
+      textarea {
+        resize: vertical;
+        min-height: 80px;
+      }
+
+      button {
+        padding: 12px;
+        background: green;
+        color: white;
+        border: none;
+        cursor: pointer;
+        font-size: 14px;
+        border-radius: 5px;
+      }
+
+      button:hover {
+        background: darkgreen;
+      }
+
+      /* RESPONSIVE DESIGN */
+      @media (max-width: 768px) {
+        .transaksi-container {
+          flex-direction: column;
+          text-align: center;
+        }
+
+        .produk-gambar img {
+          max-width: 100%;
+          margin: 0 auto 20px auto;
+        }
+
+        form {
+          text-align: left;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header-transaksi">
+      <h2>Form Transaksi</h2>
+    </div>
+
+    <div class="transaksi-box">
+      <div class="transaksi-container">
+        <div class="produk-gambar">
+          <img id="gambarProduk" alt="Produk" />
+        </div>
+
+        <form id="formTransaksi">
+          <label>Nama Produk:</label>
+          <input type="text" id="namaProduk" readonly />
+
+          <label>Harga:</label>
+          <input type="text" id="hargaProduk" readonly />
+
+          <label>Nama Pembeli:</label>
+          <input type="text" id="namaPembeli" required />
+
+          <label>Alamat:</label>
+          <textarea id="alamatPembeli" required></textarea>
+
+          <label>Nomor HP:</label>
+          <input type="tel" id="nomorHP" required />
+
+          <label>Jumlah:</label>
+          <input type="number" id="jumlahProduk" min="1" value="1" required />
+
+          <label>Metode Pembayaran:</label>
+          <select id="metodePembayaran" required>
+            <option value="">-- Pilih --</option>
+            <option>Transfer Bank</option>
+            <option>COD</option>
+            <option>E-Wallet</option>
+          </select>
+
+          <button type="submit">Buat Pesanan</button>
+        </form>
+      </div>
+    </div>
+
+    <script>
+      const params = new URLSearchParams(window.location.search);
+      const produk = params.get("produk") || "";
+      const harga = params.get("harga") || "";
+      const gambarParam = params.get("gambar");
+
+      if (gambarParam && /\.(jpg|jpeg|png|webp|gif)$/i.test(gambarParam)) {
+        document.getElementById("gambarProduk").src = gambarParam;
+      } else {
+        document.getElementById("gambarProduk").src = "img/default.png";
+      }
+
+      document.getElementById("namaProduk").value = produk;
+      document.getElementById("hargaProduk").value = "Rp " + harga;
+
+      document
+        .getElementById("formTransaksi")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+          const namaPembeli = document.getElementById("namaPembeli").value;
+          const alamat = document.getElementById("alamatPembeli").value;
+          const noHP = document.getElementById("nomorHP").value;
+          const jumlah = document.getElementById("jumlahProduk").value;
+          const metode = document.getElementById("metodePembayaran").value;
+
+          const url = `invoice.html?produk=${encodeURIComponent(
+            produk
+          )}&harga=${harga}&gambar=${encodeURIComponent(
+            gambarParam
+          )}&nama=${encodeURIComponent(
+            namaPembeli
+          )}&alamat=${encodeURIComponent(alamat)}&nohp=${encodeURIComponent(
+            noHP
+          )}&jumlah=${jumlah}&metode=${encodeURIComponent(metode)}`;
+          window.location.href = url;
+        });
+    </script>
+  </body>
+</html>

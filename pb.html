@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kategori Pohon & Tanaman Besar</title>
+    <link rel="stylesheet" href="produk.css" />
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar">
+      <div class="navbar-title">
+        <h1>Pohon & Tanaman Besar</h1>
+      </div>
+      <div class="search-container">
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Cari tanaman..."
+          onkeyup="cariProduk()"
+        />
+        <span class="search-icon">🔍</span>
+      </div>
+    </nav>
+
+    <!-- Deskripsi -->
+    <header class="page-description">
+      <p>
+        Ciptakan suasana asri dan elegan di halaman Anda dengan pilihan pohon
+        berkualitas tinggi..sentuhan alami yang memikat setiap mata.
+      </p>
+    </header>
+
+    <!-- Daftar Produk -->
+    <section class="product-list" id="productList">
+      <div class="product-card">
+        <img src="1614309913.png" alt="palem" />
+        <h3>Pohon Palem Bismarck</h3>
+        <p class="price">Rp 497.000</p>
+        <a
+          href="transaksi.html?produk=Pohon%20Palem%20Bismarck&harga=497000&gambar=1614309913.png"
+          class="btn-beli"
+        >
+          Beli / Pesan
+        </a>
+      </div>
+
+      <div class="product-card">
+        <img src="jual-pohon-tabebuya-di-bandung.jpg" alt="ketapang" />
+        <h3>Pohon Tabebuya</h3>
+        <p class="price">Rp 930.700</p>
+
+        <a
+          href="transaksi.html?produk=Pohon%20Tabebuya&harga=930700&gambar=jual-pohon-tabebuya-di-bandung.jpg"
+          class="btn-beli"
+        >
+          Beli / Pesan
+        </a>
+      </div>
+
+      <div class="product-card">
+        <img src="pk.jpg" alt="kamboja" />
+        <h3>Pohon Kamboja</h3>
+        <p class="price">Rp 762.000</p>
+        <a
+          href="transaksi.html?produk=Pohon%20Kamboja&harga=762000&gambar=pk.jpg"
+          class="btn-beli"
+        >
+          Beli / Pesan
+        </a>
+      </div>
+
+      <div class="product-card">
+        <img
+          src="pohon-ketapang-kencana-naikkan-nilai-properti-688x1024.webp"
+          alt="ketapang"
+        />
+        <h3>Pohon ketapang Kencana</h3>
+        <p class="price">Rp 680.700</p>
+
+        <a
+          href="transaksi.html?produk=Pohon%20Ketapang%20Kencana&harga=680700&gambar=/pohon-ketapang-kencana-naikkan-nilai-properti-688x1024.webp"
+          class="btn-beli"
+        >
+          Beli / Pesan
+        </a>
+      </div>
+    </section>
+
+    <script>
+      function cariProduk() {
+        let input = document.getElementById("searchInput").value.toLowerCase();
+        let cards = document.getElementsByClassName("product-card");
+        for (let i = 0; i < cards.length; i++) {
+          let title = cards[i]
+            .getElementsByTagName("h3")[0]
+            .innerText.toLowerCase();
+          cards[i].style.display = title.includes(input) ? "" : "none";
+        }
+      }
+    </script>
+  </body>
+</html>

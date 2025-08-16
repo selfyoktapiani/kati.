@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Keranjang Belanja</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background: #fdfdfd;
+      }
+
+      /* Navbar */
+      nav.navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 30px;
+        background: #afe1af;
+        color: #063b2d;
+      }
+
+      .navbar-logo {
+        font-weight: bold;
+        font-size: 30px;
+        text-decoration: none;
+        color: #063b2d;
+      }
+
+      .navbar-extra a {
+        color: #063b2d;
+        margin-left: 15px;
+        font-size: 20px;
+        text-decoration: none;
+      }
+
+      /* Keranjang kosong */
+      .cart-empty {
+        max-width: 600px;
+        margin: 80px auto;
+        text-align: center;
+        padding: 40px;
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .cart-empty h2 {
+        color: #555;
+        margin-bottom: 15px;
+      }
+
+      .cart-empty p {
+        color: #777;
+        margin-bottom: 20px;
+      }
+
+      .btn-belanja {
+        display: inline-block;
+        padding: 10px 20px;
+        background: #27ae60;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 8px;
+        transition: 0.3s;
+      }
+
+      .btn-belanja:hover {
+        background: #2ecc71;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar">
+      <a href="index.html" class="navbar-logo">bloomsyde</a>
+      <div class="navbar-extra">
+        <a href="index.html"><i data-feather="home"></i></a>
+        <a href="bs.html"><i data-feather="search"></i></a>
+      </div>
+    </nav>
+
+    <!-- Pesan Keranjang Kosong -->
+    <div class="cart-empty">
+      <h2>🛒 Keranjang Kosong</h2>
+      <p>Belum ada produk yang ditambahkan ke keranjang.</p>
+      <a href="bs.html" class="btn-belanja">Belanja Sekarang</a>
+    </div>
+
+    <!-- Feather Icons -->
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script>
+      feather.replace();
+    </script>
+  </body>
+</html>
